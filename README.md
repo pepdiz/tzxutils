@@ -8,4 +8,4 @@ My work (this repo) will be under GPL v3 license, the initial commit will be the
 
 Original work was compiled with Watcom C 10.0+ and provide executable versions of the tools, these executables are not included in the repository. Anyway original version is include as a zip file including original executables.
 
-
+Source code should compile with any modern C compiler and several OS, the project is using TCC version 0.9.27 and its main target is windows.
