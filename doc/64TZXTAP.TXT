@@ -1,0 +1,71 @@
+
+                              C64 Tape Utilities
+                             --------------------
+                                   64TZXTAP
+                                  ==========
+                             TZX -> TAP Converter
+
+                                  v0.03 beta
+
+                                      by
+                                  Tomaz Kac
+
+  This utility will convert the C64  tapes  in  the  new TZX format to the .TAP
+format used by the CCS64 emulator.
+  The TZX format is a well-known format supported by  ZX-Spectrum  for  a  long
+time  now  and it has also support for computers like Amstrad CPC, Jupiter ACE,
+Enterprise and SAM Coupe, this  utility  and  its counter-part 64VOCTZX are the
+first ones that support the format for Commodore 64 computer.
+  The good side of the format is  that  it stores the data in its original form
+and it can store  the  timing  and  encoding  information  that  is  needed  to
+re-create the original recording.
+  The  size  of  tapes  in .TZX format is basically the size of the data on the
+tape itself.  So the 64k game  will  fit  into roughly 64k size TZX file (there
+are some additional bytes taken by the timing info), while the .TAP  files  can
+go into sizes of several MegaBytes (or several 100 kbytes ZIPped).
+  That  is  not  all...  you can also store all kinds of other information like
+Archive information, Machine info, Cover Scans, etc. in this format.
+
+  Since this is BETA version it will only convert the files created by 64VOCTZX
+converter, since only 3 data blocks are support for now.  Here is the  list  of
+what is supported and what will come in future releases (if it is needed):
+
+Supported blocks :
+
+$16  (C64 ROM Loading block)
+$17  (C64 Turbo Loading block)
+$20  (Pause block)
+
+Blocks $10 - $15 (used by other computers) will be supported if they are needed
+in the future. Since those blocks are more ZX-Spectrum and Amstrad CPC specific.
+
+Also other important blocks like GOTO, Loop, Call Sequence,  ...  are  not  YET
+supported.  I will add support when there is a converter that will also support
+these blocks, since it would be quite time consuming to add support for it.
+
+  Usage :
+
+     64TZXTAP FILE.TZX [OUTPUT.TAP]
+    ----------
+
+  No  command  line  switches  are necessary for the conversion.  There will be
+warnings issued if some unsupported  blocks are encountered.  Otherwise it will
+report number of blocks that were succesfully converted.
+
+NOTE:  Utility 64VOCTZX makes another info block in the beginning  of  the  TZX
+       file  which  is  there to identify the C64 tape.  That is the reason you
+       will always have one block less  converted (or more than one) that there
+       are actually in the tape !
+
+  If you don't supply the OUTPUT filename then the INPUT filename will be used,
+but the extension will be changed to .TAP .
+
+
+HISTORY:  0.01 - * Initial release
+          0.02 - * Sometimes a 'Waring - Some of the DATA might not be recogn.'
+                   was printed for no reason.
+          0.03 - * Now writes Version 1 TAP files (after many years)
+
+  This is the last version of this program - because of the lack of support
+by the C64 community the TZX implementation for C64 is discontinued.
+                                                                             TC

@@ -1,0 +1,64 @@
+
+                              C64 Tape Utilities
+                             --------------------
+                                   64TAPVOC
+                                  ==========
+                TAP -> VOC Converter & Play TAP on SoundBlaster
+
+                                  v0.04 beta
+
+                                      by
+                                  Tomaz Kac
+
+  This utility will  convert  tapes  in  C64  .TAP  format  (used  by the CCS64
+emulator) to 8-Bit Mono .VOC files and it is able to PLAY .TAP  files  on  your
+SoundBlaster  so  you  can  record them back to tape and then play them on real
+C64.
+
+  Usage :
+
+     64TAPVOC [switches] FILE.TAP [OUTPUT.VOC]
+    ----------
+Switches:
+
+  /play     Will Play the .TAP file on your Soundblaster.  (if you don't supply
+            this switch then the .TAP file will be converted to .VOC format!)
+
+  /freq n   Use Frequency of n Hz for SB play or conversion to .VOC format.  By
+            default  the 44100 Hz is used when playing the .TAP on Soundblaster
+            and 30303 Hz is  used  when  converting  to .VOC format.  With this
+            option you can specify any frequency you like.
+
+  /reverse  This will invert the signal. Try this switch if the tape doesn't
+            load (especially on the real c64 !)
+
+  If you are replaying the file through your SoundBlaster then you can stop the
+replay at any time by pressing any key.
+
+  Use "SPACE" key to Pause the tape while playing !
+
+  So far this was thoroughly tested on my Cyrix P166+ and SB AWE32, but I got
+reports of it working on several other configurations ...
+
+  There could be problems if you have the IRQ setting of the SoundBlaster set
+to higher than 7 ... or DMA higher than 5.
+
+                             !!! IMPORTANT !!!
+                            -------------------
+When first trying to play something on the Soundblaster use lower settings and
+built up to higher ones or else you might damage the equipment or SoundBlaster.
+I cannot be held responsible if anything like that happens...
+
+
+HISTORY:  0.01 - * Released to some beta-testers only.
+          0.02 - * First Public release, fixes some minor bugs.
+          0.03 - * Frequency higher than 20kHz is handled properly now in all
+                   utilities
+          0.04 - * Updated after YEARS!
+                   Added /reverse switch (so it loads into real C64)!
+                   Added support for Version 1 TAP files (Pause changed)
+                   Use "SPACE" key to Pause the tape while playing !
+
+  This is the last version of this program - because of the lack of support
+by the C64 community the TZX implementation for C64 is discontinued.
+                                                                             TC

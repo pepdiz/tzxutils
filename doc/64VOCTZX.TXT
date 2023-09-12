@@ -1,0 +1,143 @@
+
+                              C64 Tape Utilities
+                             --------------------
+                                   64VOCTZX
+                                  ==========
+                      TAP -> TZX & VOC -> TZX Converter
+
+                                  v0.08 beta
+
+                                      by
+                                 Tomaz Kac ,
+                                 Markus Brenner &
+                                 Ben Castricum
+
+  Some  time  ago  people  started  doing .TAP files for use with the excellent
+CCS64 emulator by Hakan Sundell.   After  doing some investigating we tought we
+can implement Commodore 64 tape support to  the  already  existing  TZX  format
+which has some major improvements over the .TAP format :
+
+  - TZX Files are A LOT smaller ... for example :
+    average  64k  game  would  be  in .TAP format around 1.2 Mb long (zipped it
+    would still be around 300k) long while  it is around 64k long .TZX format !
+  - The data is exactly the same as  in  Commodore 64 after it is loaded so you
+    can  do  hacking,  etc.  directly  on  TZX  file !  - All timings and other
+    information is nicely stored in the TZX file.
+
+  Unfortunetly you cannot use the  small  TZX  files on emulators yet, since no
+C64 emulators support it so far,  but this might change in the future.  If  you
+want  to  use  the .TZX file on an emulator you will have to convert it to .TAP
+format first... you can do that with the 64TZXTAP utility which will convert it
+back to .TAP format to use on CCS64 emulator.
+
+  If you want to see what is inside the  TZX  file  you  can  use  the  PLAYTZX
+utility  with  switches /info (or /one for less info) and it will print out the
+information in EVERY block (including timing, encoding, etc.).
+
+  Since the conversion to pure data  which  is  stored  in TZX format is not so
+straightforward as conversion to .TAP format we have to know  the  loader  type
+that  the  tape is using.  There are several types of loaders already supported
+by the converter and new ones  are  being  added  frequently.  We need a lot of
+help in finding out the timings and loader structure for  new  loaders  so  any
+input is very welcomed.  If you would like to contribute to development of this
+utility then please send us an email !
+
+  Usage :
+
+     64VOCTZX [switches] FILE.TAP | FILE.VOC [OUTPUT.TZX]
+    ----------
+Switches:
+
+  /tresh n  Set Treshold value to n [0-255] (VOC  only)
+            This will set the  'Treshold' to n.  By default the Treshold is set
+            to 127 and should be good for most of the tapes.  However all sound
+            cards don't produce very clean  signal  and it can shift up/down so
+            you can set the treshold manually here...  the  valid  numbers  are
+            from  0  to  255,  BUT  don't set it too much off 127, +- 10 should
+            suffice !
+
+  /pilot n  Set  Minimal Number of  ROM Pilot Waves  to n , if some blocks  are 
+            detected as ROM blocks use higher  values  here.   Some  tapes  can
+            have gaps in pilot tones and they will normally be regarded as more
+            than  one ROM block... so you can set this setting to higher values
+            than the ones reported  by  the  converter to prevent it converting
+            bogus blocks.
+
+  /zero  n  Set 'Zero' of TAP files to n (default 2550)
+            This determines how big gap a $00 value in .TAP file is considered.
+            Since it is not 100% clear how to handle  this  we  tought  we  can
+            leave  it  so  it  can  be changed by the user.  The CCS64 emulator
+            handles the zero $00  value  as  2550.   The $00 value is basically
+            used as a pause in .TAP files.
+
+  /rom n    First Read n ROM Saved blocks (default 4) ,  set this to  higher or
+            lower  if  there  are  more/less  ROM blocks present.  Normally the
+            tapes have 4 ROM blocks in front of them.
+
+You will find detail  description  and  list  of  all loaders supported by this
+utility in 64LOADER.TXT file (and also a list  of  other  un-supported  loaders
+that  we  know  of).  Since this might help someone else out there who is doing
+similar research we tought we would add it to this distribution.
+
+  The following are the switches to convert these loaders to TZX format :
+
+  /stt      Standard Turbo Tape
+  /180      180 Loader
+  /720      720 Degress Loader
+  /ace      Ace of Aces Loader
+  /joe      Players Loader
+  /nova     NovaLoad
+  /ocean n  Ocean/Imagine Loader Type n (1-3)
+  /mast     Mastertronic Loader
+  /ket      Kettle Loader
+  /rain     Rainbird Loader
+  /zoi      Zoids Loader
+
+For description of these loaders please look in the 64LOADER.TXT file !
+
+While  converting  there  will be some output on the screen for each block that
+was converted (the output differs for  each  loader, since not all features are
+supported by all loaders. This is what each of the column means :
+
+1. Loader Name ( 5 character semi-name of the loader that is used in the block)
+2. File  or  Block Name (some  blocks  have  filenames,  it  is  printed  here.
+3. Len - Length of the block in bytes
+4. Plt - Number of pilot pulses (or bytes)  -  ROM Loader has number of pulses,
+   other loader have number of bytes in the pilot tone !
+5. Trl - Number of trailing pulses (or bytes) -  Some blocks (like ROM Repeated
+   blocks) use Trailing pulses ... the number is printed here.
+6. Blk - Number of sub-blocks in this  block -  only for some loaders which use
+   sub-blocks when loading. This is not so important
+7. C - Checksum  (checked if OK , dot if not OK) - Some blocks use checksum  to
+   tell  if  there  was  an  error  detected.   If  the block does not have the
+   checksum then this field will be left blank.
+8. E - Endianess  (M - MSB, L -  LSB) - Not so important, it means the order of
+   the bits in one byte of data.
+9. Pau - Pause after this block in seconds.
+
+Not all loaders will have all these fields filled ...
+
+Since there might be several problems while converting here  are  some  of  the
+most common causes why conversion fails :
+
+- Use only 8-bit MONO .VOC files when converting.  It is  BETTER  to  use  .TAP
+  files  as source since you can first check them on an emulator to see if they
+  work.
+- If you are converting from .VOC  file then you can select threshold value for
+  conversion (which is something emulators don't support) so  you  can  convert
+  even files which won't work in the emulator !
+- If  you  are  not sure what loader  a game uses try all possible loaders, you
+  might get lucky and  find  which  one  works.  Especially for Mastertronic or
+  Ocean games.
+- If a loader is NOT supported and you know that the game you are converting is
+  NOT available on the internet then you can send the game to us and we can try
+  and support it in another version.
+
+
+HISTORY:  0.01 - * (upto 0.06) Released to some beta-testers only.
+          0.07 - * First public release.
+          0.08 - * Added support for Version 1 TAP files (after many years)
+
+  This is the last version of this program - because of the lack of support
+by the C64 community the TZX implementation for C64 is discontinued.
+                                                                             TC

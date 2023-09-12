@@ -1,0 +1,29 @@
+
+                             ZXTape Utilities
+                           --------------------
+                           TAP to TZX Converter
+                                   v0.12b
+
+                               by Tomaz Kac
+
+  This utility will let you convert standard .TAP files to .TZX format. This
+could be usefull if you want to replay .TAP files using the PLAYTZX utility
+or convert them to .VOC format. A standard pause of 1 second will be put after
+every converted block.
+
+  Syntax is simple... :  TAP2TZX INPUT.TAP [OUTPUT.TZX]
+
+  If OUTPUT.TZX is not given then the INPUT filename will be used, but its
+extension will be changed to .TZX.
+
+HISTORY:  0.11 - Some minor bugs removed, ANSI stuff removed as well
+          0.12 - Create 1.03 version TZX files, Last Pause is always 0 seconds.
+
+  If you are looking for sample .TZX files then the best place (for now) is
+the homepage of this format:  http://www.uni-mb.si/~uel047r1a/ZXTape .
+The latest revision of the ZXTape format and of all these utilties together
+with others that use this format can be found at that page too.
+
+  My email is   tomcat@sgn.net   ... mail me if you have any problems with
+this program.
+                                                                            TC

@@ -1,0 +1,45 @@
+
+                             ZXTape Utilities
+                           --------------------
+                VOC to TZX Direct Recording Block Converter
+                                   v0.11b
+
+                               by Tomaz Kac
+
+  Sometimes when converting things to  TZX  format  you just can't get it right
+whatever you do.  This utility can help you out then.  It will convert the  VOC
+file  to  TZX  Direct  Recording  Block, which is basically the same as the VOC
+block BUT it is  8  times  smaller.   Then  you  can  use utility like TAPER to
+include the block that was not convertable into the real TZX file.
+
+  Command Line Syntax:
+
+DIRECT [switches] FILE.VOC [OUTPUT.TZX]
+
+Switches: 
+
+/start n - Conversion will start at the byte n in the VOC file.  You  must  use
+           some  other  utility like CoolEdit to find out at which byte is what
+           time.
+/end   n - Conversion will end at the byte n in the VOC file.
+/t     n - Sample rate in Z80 T-States per Sample.This will tell the utility to
+           down (or up) sample the resulting  Direct  Recording  Block.   Again
+           this  is not written in standard frequency Hz, but rather in the way
+           it is written in TZX  file.   When  you start the conversion without
+           this parameter it will tell you what frequency in Hz AND in T-States
+           per Sample it is using.  Then, if you like to  have  your  DRB  even
+           smaller  you  can divide the T-States value by 2 or some other value
+           and use it with this switch...  if  you are lucky the resulting file
+           will still work, but it will be even smaller!
+
+  If OUTPUT.TZX is not given then the INPUT filename will be used, but its
+extension will be changed to .TZX.
+
+HISTORY:  0.11 - Some minor bugs removed, ANSI stuff removed as well, first
+                 public release.
+
+
+  My email is   tomcat@sgn.net   ... mail me if you have any problems
+with this program.
+
+                                                                            TC

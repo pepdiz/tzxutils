@@ -1,0 +1,55 @@
+
+                              C64 Tape Utilities
+                             --------------------
+                                   64VOCTAP
+                                  ==========
+                             VOC -> TAP Converter
+
+                                  v0.04 beta
+
+                                      by
+                                  Tomaz Kac
+
+  This utility will convert tapes in 8-bit Mono .VOC format to .TAP format used
+by the CCS64 emulator.   This  is  not  so  trivial and straight-forward as you
+would think since you have to get the volume and other settings right when  you
+are making the .VOC file.  To overcome some problems there is (only) one switch
+which can improve the conversion.
+
+  Usage :
+
+     64VOCTAP FILE.VOC [OUTPUT.TAP]
+    ----------
+Switches:
+
+   /tresh n This will set the  'Treshold' to n.  By default the Treshold is set
+            to 127 and should be good for most of the tapes.  However all sound
+            cards don't produce very clean  signal  and it can shift up/down so
+            you can set the treshold manually here...  the  valid  numbers  are
+            from  0  to  255,  BUT  don't set it too much off 127, +- 10 should
+            suffice !
+
+  This version does  NOT  need  the  /shift  command  line  option anymore, the
+detection is made automagically by the converter now !
+
+  If you don't supply the OUTPUT filename then the INPUT filename will be used,
+but the extension will be changed to .TAP .
+
+  The conversion is pretty quick and it needs as much memory as the  .VOC  file
+length (sorry, but I didn't bother with reading of VOC file in 'chunks') - i.e.
+if  the  VOC file is 12MB big then you will need 12MB of free memory !!!  Maybe
+in next versions this will be fixed...
+
+
+HISTORY:  0.01 - * Released to some beta-testers only.
+          0.02 - * First Public release, fixes some minor bugs.
+          0.03 - * Added two switches to 64VOCTAP which should improve the
+                   conversion results:
+                   /shift   - which 'shifts' the VOC by one pulse  &
+                   /tresh n - which sets the 'treshold' value to n [0-255]
+          0.04 - * Removed the /shift switch since this is determined
+                   automatically now
+
+  This is the last version of this program - because of the lack of support
+by the C64 community the TZX implementation for C64 is discontinued.
+                                                                             TC
