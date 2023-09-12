@@ -1,5 +1,5 @@
 # tzxutils
-utilities to deal with zx spectrum tzx tape files
+Utilities to deal with zx spectrum tzx tape files
 
 Based on the tzxutils package created in 1997 by Tomaz Kac and others like Markus Brenner, Ben Castricum and Martijn van der Heide.
 
