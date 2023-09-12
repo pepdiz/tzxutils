@@ -1,0 +1,4 @@
+Couldn't find any license for this work, assuming public domain.
+Every souce file has a copyright text, usually  (c) 1998 Tomaz Kac
+
+This folder contains original work and original license apply.
